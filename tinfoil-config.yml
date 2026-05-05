@@ -8,6 +8,7 @@ containers:
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
+      - NODE_OPTIONS: "--dns-result-order=ipv4first"
       - DATA_DIR: "/mnt/ramdisk/email-mcp"
       - PUBLIC_BASE_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev"
       - CERTIFICATE_BASE_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev/certificates"
