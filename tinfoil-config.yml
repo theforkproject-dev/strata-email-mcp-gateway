@@ -1,0 +1,51 @@
+cvm-version: 0.7.5
+cpus: 2
+memory: 8192
+
+containers:
+  - name: "email-mcp-gateway"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-001@sha256:258836bbe93dd61fcd68e8d5909211e0a361c8a02903242a8baecfb431c95633"
+    env:
+      - HOST: "0.0.0.0"
+      - PORT: "8080"
+      - DATA_DIR: "/mnt/ramdisk/email-mcp"
+      - PUBLIC_BASE_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev"
+      - CERTIFICATE_BASE_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev/certificates"
+      - EMAIL_PROVIDER: "dry-run"
+      - EMAIL_FROM: "strata-mcp@theforkproject.com"
+      - WITNESS_URLS: "strata-witness-poc-1=https://strata-witness-poc-1.amotivv.containers.tinfoil.dev"
+      - WITNESS_THRESHOLD: "1"
+      - GATEWAY_SIGNED_WITNESS_REQUESTS_ENABLED: "true"
+      - GATEWAY_ID: "gateway:strata-poc-demo"
+      - GATEWAY_KEY_ID: "gateway:strata-poc-demo:epoch-tinfoil-001"
+      - WITNESS_EPOCH_ID: "wit_epoch_tinfoil_poc_002"
+      - REGISTRY_EPOCH_ID: "registry_epoch_tinfoil_poc_002"
+      - WITNESS_WORKFLOW_ID: "email.send"
+      - POLICY_WITNESS_URLS: "p1=https://strata-email-policy-witness-1.fly.dev,p2=https://strata-email-policy-witness-2.fly.dev,p3=https://strata-email-policy-witness-3.fly.dev"
+      - POLICY_WITNESS_THRESHOLD: "2"
+      - REGISTRY_URL: "https://strata-email-registry.fly.dev"
+      - POLICY_BUNDLE_URL: "https://strata-email-registry.fly.dev/policies/epochs/email-policy-epoch-001"
+      - TENANT_ID: "default"
+      - OPERATOR_ID: "operator:amotivv-demo"
+      - OPERATOR_ADMISSION_KEY_ID: "operator-admission:amotivv-demo"
+    secrets:
+      - MCP_SESSION_SECRET
+      - GATEWAY_KEY_JSON
+      - OPERATOR_ADMISSION_KEY_JSON
+    command: ["node", "src/server.js"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+    restart: always
+
+shim:
+  upstream-port: 8080
+  paths:
+    - /health
+    - /mcp
+    - /certificates/*
+    - /.well-known/*
+    - /oauth/*
