@@ -16,3 +16,5 @@ The gateway image/source may remain private. This repo is the public measurement
 The current deployment uses `EMAIL_PROVIDER=resend` and OAuth so Claude Desktop and other Anthropic MCP clients can authorize with PKCE, call the remote `/mcp` endpoint, and send real verified email through the witnessed gateway.
 
 OAuth state is stored at `/mnt/ramdisk/email-mcp/oauth-store.json` for the demo. Client registrations and refresh tokens survive while the container is running, but are lost on relaunch.
+
+The gateway pins the Fly-hosted registry and policy artifacts by digest and registry trust-anchor key. Fly serves the bytes, but the gateway refuses registry or policy material that does not match the configured pins.
