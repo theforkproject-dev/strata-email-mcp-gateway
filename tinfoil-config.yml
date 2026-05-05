@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "email-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-001@sha256:258836bbe93dd61fcd68e8d5909211e0a361c8a02903242a8baecfb431c95633"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-002@sha256:b1f18465bae8dfa0aee73a24be45a5db1db0cca3ba0739c950fdf27ce397c915"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
