@@ -11,8 +11,10 @@ containers:
       - DATA_DIR: "/mnt/ramdisk/email-mcp"
       - PUBLIC_BASE_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev"
       - CERTIFICATE_BASE_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev/certificates"
-      - EMAIL_PROVIDER: "dry-run"
+      - EMAIL_PROVIDER: "resend"
       - EMAIL_FROM: "strata-mcp@theforkproject.com"
+      - OAUTH_ISSUER: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev"
+      - OAUTH_STORE_PATH: "/mnt/ramdisk/email-mcp/oauth-store.json"
       - WITNESS_URLS: "strata-witness-poc-1=https://strata-witness-poc-1.amotivv.containers.tinfoil.dev"
       - WITNESS_THRESHOLD: "1"
       - GATEWAY_SIGNED_WITNESS_REQUESTS_ENABLED: "true"
@@ -30,6 +32,8 @@ containers:
       - OPERATOR_ADMISSION_KEY_ID: "operator-admission:amotivv-demo"
     secrets:
       - MCP_SESSION_SECRET
+      - RESEND_API_KEY
+      - OAUTH_CONSENT_PASSWORD_SHA256
       - GATEWAY_KEY_JSON
       - OPERATOR_ADMISSION_KEY_JSON
     command: ["node", "src/server.js"]

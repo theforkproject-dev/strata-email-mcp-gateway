@@ -13,4 +13,6 @@ The gateway image/source may remain private. This repo is the public measurement
 - non-secret runtime settings
 - Tinfoil secret names, not secret values
 
-The first deployment uses `EMAIL_PROVIDER=dry-run` so it proves the MCP/gateway/witness/certificate path without sending real email.
+The current deployment uses `EMAIL_PROVIDER=resend` and OAuth so Claude Desktop and other Anthropic MCP clients can authorize with PKCE, call the remote `/mcp` endpoint, and send real verified email through the witnessed gateway.
+
+OAuth state is stored at `/mnt/ramdisk/email-mcp/oauth-store.json` for the demo. Client registrations and refresh tokens survive while the container is running, but are lost on relaunch.
