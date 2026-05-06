@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "email-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-009@sha256:317c60f8e4db9b191620f625e0cbf80f955fba7776a9de56fa937531bda62896"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-010@sha256:61a9b9dbb07dd99594eff2daad0174b6d2af3e7853bda2332b42edd0352962eb"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -15,7 +15,11 @@ containers:
       - EMAIL_PROVIDER: "resend"
       - EMAIL_FROM: "strata-mcp@theforkproject.com"
       - OAUTH_ISSUER: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev"
-      - OAUTH_STORE_PATH: "/mnt/ramdisk/email-mcp/oauth-store.json"
+      - OAUTH_STORE_BACKEND: "dynamodb"
+      - OAUTH_DYNAMODB_TABLE: "strata-oauth-poc-oauth-store-345337478194"
+      - OAUTH_DYNAMODB_AWS_REGION: "us-east-2"
+      - OAUTH_DYNAMODB_TTL_ATTRIBUTE: "ttl"
+      - OAUTH_REFRESH_TOKEN_TTL_SECONDS: "604800"
       - CERTIFICATE_BUNDLE_STORE_BACKEND: "s3-cloudfront"
       - CERTIFICATE_BUNDLE_AWS_REGION: "us-east-2"
       - CERTIFICATE_BUNDLE_S3_BUCKET: "strata-certificate-bundles-poc-345337478194"
@@ -41,8 +45,8 @@ containers:
       - POLICY_BUNDLE_DIGEST: "1c5a90c054c5011e93512f155caa937ecf08107a7f8ccd4de85aea8c14c3fffa"
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-email-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-email-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-email-gateway.12"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:317c60f8e4db9b191620f625e0cbf80f955fba7776a9de56fa937531bda62896"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-email-gateway.13"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:61a9b9dbb07dd99594eff2daad0174b6d2af3e7853bda2332b42edd0352962eb"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
       - L1_TINFOIL_WITNESS_ID: "strata-witness-poc-1"
@@ -59,6 +63,8 @@ containers:
       - MCP_SESSION_SECRET
       - RESEND_API_KEY
       - OAUTH_CONSENT_PASSWORD_SHA256
+      - OAUTH_DYNAMODB_AWS_ACCESS_KEY_ID
+      - OAUTH_DYNAMODB_AWS_SECRET_ACCESS_KEY
       - CERTIFICATE_BUNDLE_AWS_ACCESS_KEY_ID
       - CERTIFICATE_BUNDLE_AWS_SECRET_ACCESS_KEY
       - GATEWAY_KEY_JSON
