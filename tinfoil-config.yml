@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "email-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-008@sha256:e6c02aa334a52f8383903d034cf02397ee50daf7965bf593637f99ac6672603e"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-009@sha256:317c60f8e4db9b191620f625e0cbf80f955fba7776a9de56fa937531bda62896"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -16,6 +16,13 @@ containers:
       - EMAIL_FROM: "strata-mcp@theforkproject.com"
       - OAUTH_ISSUER: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev"
       - OAUTH_STORE_PATH: "/mnt/ramdisk/email-mcp/oauth-store.json"
+      - CERTIFICATE_BUNDLE_STORE_BACKEND: "s3-cloudfront"
+      - CERTIFICATE_BUNDLE_AWS_REGION: "us-east-2"
+      - CERTIFICATE_BUNDLE_S3_BUCKET: "strata-certificate-bundles-poc-345337478194"
+      - CERTIFICATE_BUNDLE_S3_PREFIX: "certificates"
+      - CERTIFICATE_BUNDLE_PUBLIC_BASE: "https://d33vpkebicuw51.cloudfront.net/certificates"
+      - CERTIFICATE_BUNDLE_LOCK_MODE: "GOVERNANCE"
+      - CERTIFICATE_BUNDLE_PUBLISH_REQUIRED: "true"
       - WITNESS_URLS: "strata-witness-poc-1=https://strata-witness-poc-1.amotivv.containers.tinfoil.dev"
       - WITNESS_THRESHOLD: "1"
       - GATEWAY_SIGNED_WITNESS_REQUESTS_ENABLED: "true"
@@ -34,8 +41,8 @@ containers:
       - POLICY_BUNDLE_DIGEST: "1c5a90c054c5011e93512f155caa937ecf08107a7f8ccd4de85aea8c14c3fffa"
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-email-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-email-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-email-gateway.11"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:e6c02aa334a52f8383903d034cf02397ee50daf7965bf593637f99ac6672603e"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-email-gateway.12"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:317c60f8e4db9b191620f625e0cbf80f955fba7776a9de56fa937531bda62896"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
       - L1_TINFOIL_WITNESS_ID: "strata-witness-poc-1"
@@ -52,6 +59,8 @@ containers:
       - MCP_SESSION_SECRET
       - RESEND_API_KEY
       - OAUTH_CONSENT_PASSWORD_SHA256
+      - CERTIFICATE_BUNDLE_AWS_ACCESS_KEY_ID
+      - CERTIFICATE_BUNDLE_AWS_SECRET_ACCESS_KEY
       - GATEWAY_KEY_JSON
       - OPERATOR_ADMISSION_KEY_JSON
     command: ["node", "src/server.js"]
