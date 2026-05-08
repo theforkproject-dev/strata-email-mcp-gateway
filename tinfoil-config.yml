@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "email-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-017@sha256:9ff3cec751e82f5ad37739f09a554a9126edcb82ae7d3d98565be7e889523d49"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-018@sha256:1d8c56bbc9f3446de5de0b3d1326558656735fe3298ccfec101fd99c4ac2a2bb"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -38,15 +38,15 @@ containers:
       - POLICY_WITNESS_URLS: "p1=https://strata-email-policy-witness-1.fly.dev,p2=https://strata-email-policy-witness-2.fly.dev,p3=https://strata-email-policy-witness-3.fly.dev"
       - POLICY_WITNESS_THRESHOLD: "2"
       - REGISTRY_URL: "https://strata-email-registry.fly.dev"
-      - REGISTRY_EPOCH_DIGEST: "cc0eecd5174ef78d8779793b0b7573de58a3bc8d02e68ee91f10a8f6fec92a09"
+      - REGISTRY_EPOCH_DIGEST: "d2fba2f7745d8dbbe96137c787d0dc86a64f7a950e5421e8ef9d195d29e450c0"
       - REGISTRY_TRUST_ANCHOR_KEY_ID: "registry-authority:email-demo"
       - REGISTRY_TRUST_ANCHOR_PUBLIC_KEY_PEM_BASE64: "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQUN2empUb1lvMllNQjlMVnJBZ2ZpeGRvOTBOdXFZeElCekZyclJkZjB1dTQ9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo="
       - POLICY_BUNDLE_URL: "https://strata-email-registry.fly.dev/policies/epochs/email-policy-epoch-001"
       - POLICY_BUNDLE_DIGEST: "1c5a90c054c5011e93512f155caa937ecf08107a7f8ccd4de85aea8c14c3fffa"
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-email-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-email-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-email-gateway.21"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:9ff3cec751e82f5ad37739f09a554a9126edcb82ae7d3d98565be7e889523d49"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-email-gateway.22"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:1d8c56bbc9f3446de5de0b3d1326558656735fe3298ccfec101fd99c4ac2a2bb"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
       - L1_TINFOIL_WITNESS_ID: "strata-witness-poc-1"
