@@ -4,7 +4,7 @@ memory: 8192
 
 containers:
   - name: "email-mcp-gateway"
-    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-018@sha256:1d8c56bbc9f3446de5de0b3d1326558656735fe3298ccfec101fd99c4ac2a2bb"
+    image: "ghcr.io/theforkproject-dev/strata-ebo-mcps:tinfoil-email-gateway-019@sha256:e6a405ee8276771cb50b473cc119ff860efe0e501ffc7ec0266dd20cf1471da1"
     env:
       - HOST: "0.0.0.0"
       - PORT: "8080"
@@ -45,8 +45,8 @@ containers:
       - POLICY_BUNDLE_DIGEST: "1c5a90c054c5011e93512f155caa937ecf08107a7f8ccd4de85aea8c14c3fffa"
       - GATEWAY_TINFOIL_CONTAINER_NAME: "strata-email-mcp-gateway"
       - GATEWAY_TINFOIL_CONFIG_REPO: "theforkproject-dev/strata-email-mcp-gateway"
-      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-email-gateway.24"
-      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:1d8c56bbc9f3446de5de0b3d1326558656735fe3298ccfec101fd99c4ac2a2bb"
+      - GATEWAY_TINFOIL_CONFIG_TAG: "v0.1.0-email-gateway.25"
+      - GATEWAY_TINFOIL_IMAGE_DIGEST: "sha256:e6a405ee8276771cb50b473cc119ff860efe0e501ffc7ec0266dd20cf1471da1"
       - GATEWAY_TINFOIL_ATTESTATION_URL: "https://strata-email-mcp-gateway.amotivv.containers.tinfoil.dev/.well-known/tinfoil-attestation"
       - GATEWAY_TINFOIL_ATTESTATION_REQUIRED: "true"
       - L1_TINFOIL_WITNESS_ID: "strata-witness-poc-1"
